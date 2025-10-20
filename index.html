@@ -105,7 +105,10 @@
   <div class="card" id="quiz-card">
     <h1>Боги и символы Древнего Египта</h1>
     <div id="question-container"></div>
-    <button id="next-btn">Проверить</button>
+    <div id="progress" style="text-align: center; margin-top: 10px; font-weight: bold;"></div>
+    <button id="next-btn" style="display: none;">Проверить</button>
+    <button id="check-btn">Проверить</button>
+    <button id="fix-btn" style="display: none;">Исправить ошибки</button>
   </div>
 
   <script>
@@ -749,39 +752,9 @@
       },
       {
         type: "text",
-        question: "Какое значение придавалось Карнакскому храму в древнеегипетской культуре, и почему он считался одним из главных религиозных центров, особенно во времена Нового царства?",
-        options: ["Центр поклонения богу Луны", "Место хранения Книги Мёртвых", "Главный храм бога Амон-Ра", "Святилище богини Бастет"],
-        answer: "Главный храм бога Амон-Ра"
-      },
-      {
-        type: "text",
         question: "Какой символ, представлявший собой столб с четырьмя поперечными перекладинами, ассоциировался с богом Осирисом и символизировал стабильность, силу и плодородие в древнеегипетской традиции?",
         options: ["Анх", "Уас", "Джед", "Тиет"],
         answer: "Джед"
-      },
-      {
-        type: "text",
-        question: "Какой бог, почитаемый в Карнакском храме как верховное божество Фив, ассоциировался с созидательной энергией и слиянием с Ра в образе Амон-Ра, и чьё влияние усилилось в период Нового царства благодаря теологическим реформам?",
-        options: ["Птах", "Амон", "Осирис", "Хепри"],
-        answer: "Амон"
-      },
-      {
-        type: "text",
-        question: "Какой символ, представляющий собой посох с раздвоенным основанием и головой животного (часто сетха), использовался в ритуалах для обозначения божественной власти и могущества, и какова была его роль в церемониях, связанных с фараонами?",
-        options: ["Анх", "Уас", "Джед", "Тиет"],
-        answer: "Уас"
-      },
-      {
-        type: "text",
-        question: "Какой цветок, связанный с богом Нефертумом и мифом о создании мира, символизировал возрождение и чистоту, отражая ежедневное появление солнца из первозданного хаоса, и как он использовался в ритуальных подношениях?",
-        options: ["Лотос", "Папирус", "Ирис", "Кувшинка"],
-        answer: "Лотос"
-      },
-      {
-        type: "text",
-        question: "Какова была роль аллеи сфинксов в Карнакском храмовом комплексе, и как она связывала храмы Луксора и Карнака в религиозных процессиях, таких как праздник Опет, для укрепления связи между фараоном и божеством?",
-        options: ["Символизировала загробный путь", "Служила ритуальным коридором для процессий", "Олицетворяла плодородие Нила", "Была местом хранения священных текстов"],
-        answer: "Служила ритуальным коридором для процессий"
       },
       {
         type: "text",
@@ -791,7 +764,7 @@
       },
       {
         type: "text",
-        question: "Какой символ, известный как 'крест жизни', был связан с бессмертием и вечной жизнью, часто изображался в руках богов и фараонов, и использовался в погребальных обрядах для обеспечения защиты души в загробном мире?",
+        question: "Какой символ, известный как 'крест жизни', был связан с бессмертием и вечной жизнью, часто изображался в руках богов и фараонов, использовался в погребальных обрядах для обеспечения защиты души в загробном мире?",
         options: ["Уас", "Анх", "Джед", "Тиет"],
         answer: "Анх"
       },
@@ -806,42 +779,6 @@
         question: "Какой амулет, известный как 'узел Исиды', использовался в погребальных обрядах для защиты умершего, и как его форма, напоминающая завязанный пояс, отражала магическую силу богини Исиды в древнеегипетской традиции?",
         options: ["Тиет", "Уаджет", "Анх", "Джед"],
         answer: "Тиет"
-      },
-      {
-        type: "text",
-        question: "Какую роль играл Карнакский храм в укреплении власти фараонов Нового царства, и почему его гипостильный зал считался архитектурным воплощением космоса, связанным с богом Амон-Ра?",
-        options: ["Место хранения священных текстов", "Центр поклонения богу Луны", "Символ космического порядка и божественной власти", "Святилище богини Бастет"],
-        answer: "Символ космического порядка и божественной власти"
-      },
-      {
-        type: "text",
-        question: "Какой символ, представлявший собой столб с четырьмя поперечными перекладинами, ассоциировался с Осирисом и символизировал стабильность и плодородие, а также использовался в ритуалах для укрепления власти фараона в загробном мире?",
-        options: ["Анх", "Уас", "Джед", "Тиет"],
-        answer: "Джед"
-      },
-      {
-        type: "text",
-        question: "Какой бог, связанный с Карнакским храмом, считался воплощением скрытой силы и чьё имя переводится как 'скрытый', отражая его невидимую, но вездесущую природу в теологии Нового царства?",
-        options: ["Амон", "Ра", "Птах", "Тот"],
-        answer: "Амон"
-      },
-      {
-        type: "text",
-        question: "Какой символ, часто изображавшийся в руках богов и фараонов, представлял собой посох с раздвоенным основанием и головой мифического животного, и как его использование в ритуалах подчеркивало связь между божественной и царской властью?",
-        options: ["Анх", "Уас", "Джед", "Тиет"],
-        answer: "Уас"
-      },
-      {
-        type: "text",
-        question: "Какой цветок, связанный с мифом о рождении солнца из первозданных вод, использовался в храмовых ритуалах как символ чистоты и возрождения, и как его связь с богом Нефертумом отражала концепцию ежедневного обновления мира?",
-        options: ["Лотос", "Папирус", "Жасмин", "Клевер"],
-        answer: "Лотос"
-      },
-      {
-        type: "text",
-        question: "Какова была функция аллеи сфинксов в контексте праздника Опет, и как её расположение между храмами Карнака и Луксора символизировало путешествие бога Амон-Ра и обновление царской власти?",
-        options: ["Символизировала загробный путь", "Служила ритуальным маршрутом для процессий", "Олицетворяла защиту от наводнений", "Была местом захоронения жрецов"],
-        answer: "Служила ритуальным маршрутом для процессий"
       },
       {
         type: "text",
@@ -894,6 +831,9 @@
 
     const questionContainer = document.getElementById('question-container');
     const nextBtn = document.getElementById('next-btn');
+    const checkBtn = document.getElementById('check-btn');
+    const fixBtn = document.getElementById('fix-btn');
+    const progressDiv = document.getElementById('progress');
 
     function showQuestion(index) {
       const q = currentQuestions[index];
@@ -901,6 +841,9 @@
     <h2>${q.question}</h2>
     ${q.type === "image" ? `<img src="${q.image}" alt="question image">` : ""}
     ${q.options.map(opt => `<div class="option" onclick="selectOption('${opt}')">${opt}</div>`).join('')}`;
+      
+      // Обновляем счетчик вопросов
+      progressDiv.textContent = `Вопрос ${index + 1} из ${currentQuestions.length}`;
       
       // Сбрасываем подсветку всех вариантов при показе нового вопроса
       setTimeout(() => {
@@ -916,7 +859,7 @@
     let selectedElement = null;
     function selectOption(opt) {
       // Проверяем, можно ли выбирать вариант (до нажатия кнопки "Проверить")
-      if (nextBtn.textContent === "Далее") return; // Если кнопка уже "Далее", не позволяем выбирать
+      if (checkBtn.style.display === 'none') return; // Если кнопка "Проверить" скрыта, не позволяем выбирать
       selected = opt;
       // Сбрасываем подсветку всех вариантов
       document.querySelectorAll('.option').forEach(el => {
@@ -931,98 +874,117 @@
       }
     }
 
-    nextBtn.addEventListener('click', () => {
-      if (nextBtn.textContent === "Проверить") {
-        // Режим проверки
-        if (!selected) return alert("Выбери ответ!");
-        const currentQuestion = currentQuestions[currentIndex];
-        const correct = currentQuestion.answer === selected;
+    let allAnswers = []; // Массив для хранения всех ответов пользователя
 
-        // Подсвечиваем правильный и неправильный ответы
-        document.querySelectorAll('.option').forEach(el => {
-          if (el.textContent === currentQuestion.answer) {
-            // Подсвечиваем правильный ответ зеленым
-            el.classList.add('correct');
-          } else if (el.textContent === selected && !correct) {
-            // Подсвечиваем выбранный неправильный ответ красным
-            el.classList.add('incorrect');
-          }
-        });
+    checkBtn.addEventListener('click', () => {
+      if (!selected) return alert("Выбери ответ!");
+      const currentQuestion = currentQuestions[currentIndex];
+      const correct = currentQuestion.answer === selected;
 
-        // Находим индекс текущего вопроса в оригинальном массиве
-        const originalIndex = originalQuestions.findIndex(q => q.question === currentQuestion.question);
+      // Сохраняем ответ пользователя
+      allAnswers.push({
+        questionIndex: currentIndex,
+        question: currentQuestion.question,
+        userAnswer: selected,
+        correctAnswer: currentQuestion.answer,
+        isCorrect: correct
+      });
 
-        if (correct) {
-          score++;
-          totalScore++;
-          // Отмечаем вопрос как правильно отвеченный
-          if (originalIndex !== -1) {
-            answeredCorrectly.add(originalIndex);
-            // Если этот вопрос был отмечен как неправильно отвеченный, убираем его
-            answeredIncorrectly.delete(originalIndex);
-          }
-        } else {
-          // Отмечаем вопрос как неправильно отвеченный
-          if (originalIndex !== -1) {
-            answeredIncorrectly.add(originalIndex);
-          }
+      // Подсвечиваем правильный и неправильный ответы
+      document.querySelectorAll('.option').forEach(el => {
+        if (el.textContent === currentQuestion.answer) {
+          // Подсвечиваем правильный ответ зеленым
+          el.classList.add('correct');
+        } else if (el.textContent === selected && !correct) {
+          // Подсвечиваем выбранный неправильный ответ красным
+          el.classList.add('incorrect');
         }
+      });
 
-        // Изменяем текст кнопки на "Далее"
-        nextBtn.textContent = "Далее";
+      // Блокируем выбор вариантов после проверки
+      document.querySelectorAll('.option').forEach(el => {
+        el.style.pointerEvents = 'none';
+      });
 
-        // Блокируем выбор вариантов после проверки
-        document.querySelectorAll('.option').forEach(el => {
-          el.style.pointerEvents = 'none';
-        });
+      // Скрываем кнопку "Проверить"
+      checkBtn.style.display = 'none';
+      // Показываем кнопку "Далее"
+      nextBtn.style.display = 'inline-block';
+
+      selected = null;
+      selectedElement = null;
+      currentIndex++;
+
+      // Если это была последняя попытка в текущем списке вопросов
+      if (currentIndex >= currentQuestions.length) {
+        // Скрываем кнопку "Далее" и показываем результаты
+        nextBtn.style.display = 'none';
+        showAllResults();
       } else {
-        // Режим перехода к следующему вопросу
-        selected = null;
-        selectedElement = null;
-        currentIndex++;
-
-        // Если это была последняя попытка в текущем списке вопросов
-        if (currentIndex >= currentQuestions.length) {
-          // Проверяем, все ли вопросы отвечены правильно
-          if (answeredCorrectly.size === originalQuestions.length) {
-            // Все вопросы отвечены правильно, завершаем тест
-            showResult();
-            return;
-          }
-
-          // Обновляем текущий список вопросов, перенося неправильно отвеченные в конец
-          const remainingQuestions = originalQuestions.filter((q, index) => !answeredCorrectly.has(index) && !answeredIncorrectly.has(index));
-          const incorrectQuestions = originalQuestions.filter((q, index) => answeredIncorrectly.has(index));
-
-          // Объединяем: сначала оставшиеся (неотвеченные), затем неправильно отвеченные
-          currentQuestions = [...remainingQuestions, ...incorrectQuestions];
-          currentIndex = 0; // Начинаем с начала нового списка
-          iteration++;
-        }
-
-        // Показываем следующий вопрос, если он есть
-        if (currentIndex < currentQuestions.length) {
-          showQuestion(currentIndex);
-          // Возвращаем текст кнопки на "Проверить" для нового вопроса
-          nextBtn.textContent = "Проверить";
-          // Возвращаем возможность выбора вариантов
-          document.querySelectorAll('.option').forEach(el => {
-            el.style.pointerEvents = 'auto';
-          });
-        }
+        // Обновляем счетчик вопросов
+        progressDiv.textContent = `Вопрос ${currentIndex + 1} из ${currentQuestions.length}`;
       }
     });
 
-    function showResult() {
+    nextBtn.addEventListener('click', () => {
+      // Показываем следующий вопрос
+      showQuestion(currentIndex);
+      // Возвращаем кнопку "Проверить" и скрываем "Далее"
+      checkBtn.style.display = 'inline-block';
+      nextBtn.style.display = 'none';
+      // Возвращаем возможность выбора вариантов
+      document.querySelectorAll('.option').forEach(el => {
+        el.style.pointerEvents = 'auto';
+      });
+    });
+
+    fixBtn.addEventListener('click', () => {
+      // Показываем вопросы с ошибками
+      currentQuestions = originalQuestions.filter((q, index) => !answeredCorrectly.has(index));
+      currentIndex = 0;
+      allAnswers = []; // Очищаем предыдущие ответы
+      fixBtn.style.display = 'none';
+      checkBtn.style.display = 'inline-block';
+      nextBtn.style.display = 'none';
+      showQuestion(currentIndex);
+      progressDiv.textContent = `Вопрос ${currentIndex + 1} из ${currentQuestions.length}`;
+    });
+
+    function showAllResults() {
+      // Подсчитываем правильные и неправильные ответы
+      const correctCount = allAnswers.filter(answer => answer.isCorrect).length;
+      const incorrectCount = allAnswers.length - correctCount;
+
+      // Обновляем множества правильно и неправильно отвеченных вопросов
+      allAnswers.forEach(answer => {
+        const originalIndex = originalQuestions.findIndex(q => q.question === answer.question);
+        if (originalIndex !== -1) {
+          if (answer.isCorrect) {
+            answeredCorrectly.add(originalIndex);
+          } else {
+            answeredIncorrectly.add(originalIndex);
+          }
+        }
+      });
+
+      // Показываем результаты
       questionContainer.innerHTML = `
     <div class="result">
-      <h2>Результат</h2>
-      <p>Правильных ответов: ${totalScore} из ${originalQuestions.length}</p>
-      <p>Тест пройден за ${iteration} итераций.</p>
-      <p>Все ответы верны! Великолепно!</p>
+      <h2>Результаты</h2>
+      <p>Правильных ответов: ${correctCount} из ${allAnswers.length}</p>
+      <p>Неправильных ответов: ${incorrectCount}</p>
+      ${answeredIncorrectly.size > 0 ? '<p>Есть неправильные ответы. Нужно исправить!</p>' : '<p>Все ответы верны! Великолепно!</p>'}
     </div>
   `;
-      nextBtn.classList.add('hidden');
+
+      if (answeredIncorrectly.size > 0) {
+        // Показываем кнопку "Исправить ошибки"
+        fixBtn.style.display = 'inline-block';
+      } else {
+        // Все ответы верны, завершаем тест
+        checkBtn.style.display = 'none';
+        nextBtn.style.display = 'none';
+      }
     }
 
     showQuestion(currentIndex);
