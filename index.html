@@ -78,6 +78,18 @@
     .option:hover {
       background: #f1e1b5;
     }
+    
+    .correct {
+      background: #a8e6a1 !important;
+    }
+    
+    .incorrect {
+      background: #f9a8a8 !important;
+    }
+    
+    .selected {
+      background: #d4b96a;
+    }
 
     .hidden {
       display: none;
@@ -93,7 +105,7 @@
   <div class="card" id="quiz-card">
     <h1>Боги и символы Древнего Египта</h1>
     <div id="question-container"></div>
-    <button id="next-btn">Далее</button>
+    <button id="next-btn">Проверить</button>
   </div>
 
   <script>
@@ -889,65 +901,115 @@
     <h2>${q.question}</h2>
     ${q.type === "image" ? `<img src="${q.image}" alt="question image">` : ""}
     ${q.options.map(opt => `<div class="option" onclick="selectOption('${opt}')">${opt}</div>`).join('')}`;
+      
+      // Сбрасываем подсветку всех вариантов при показе нового вопроса
+      setTimeout(() => {
+        document.querySelectorAll('.option').forEach(el => {
+          el.classList.remove('selected', 'correct', 'incorrect');
+        });
+        selected = null;
+        selectedElement = null;
+      }, 10);
     }
 
     let selected = null;
+    let selectedElement = null;
     function selectOption(opt) {
+      // Проверяем, можно ли выбирать вариант (до нажатия кнопки "Проверить")
+      if (nextBtn.textContent === "Далее") return; // Если кнопка уже "Далее", не позволяем выбирать
       selected = opt;
-      document.querySelectorAll('.option').forEach(el => el.style.background = '#f8eed4');
-      const chosen = [...document.querySelectorAll('.option')].find(el => el.textContent === opt);
-      chosen.style.background = '#d4b96a';
+      // Сбрасываем подсветку всех вариантов
+      document.querySelectorAll('.option').forEach(el => {
+        el.classList.remove('selected');
+        // Убираем классы подсветки правильного/неправильного ответа, если они есть
+        el.classList.remove('correct', 'incorrect');
+      });
+      // Находим и подсвечиваем выбранный вариант
+      selectedElement = [...document.querySelectorAll('.option')].find(el => el.textContent === opt);
+      if (selectedElement) {
+        selectedElement.classList.add('selected');
+      }
     }
 
     nextBtn.addEventListener('click', () => {
-      if (!selected) return alert("Выбери ответ!");
-      const currentQuestion = currentQuestions[currentIndex];
-      const correct = currentQuestion.answer === selected;
+      if (nextBtn.textContent === "Проверить") {
+        // Режим проверки
+        if (!selected) return alert("Выбери ответ!");
+        const currentQuestion = currentQuestions[currentIndex];
+        const correct = currentQuestion.answer === selected;
 
-      // Находим индекс текущего вопроса в оригинальном массиве
-      const originalIndex = originalQuestions.findIndex(q => q.question === currentQuestion.question);
+        // Подсвечиваем правильный и неправильный ответы
+        document.querySelectorAll('.option').forEach(el => {
+          if (el.textContent === currentQuestion.answer) {
+            // Подсвечиваем правильный ответ зеленым
+            el.classList.add('correct');
+          } else if (el.textContent === selected && !correct) {
+            // Подсвечиваем выбранный неправильный ответ красным
+            el.classList.add('incorrect');
+          }
+        });
 
-      if (correct) {
-        score++;
-        totalScore++;
-        // Отмечаем вопрос как правильно отвеченный
-        if (originalIndex !== -1) {
-          answeredCorrectly.add(originalIndex);
-          // Если этот вопрос был отмечен как неправильно отвеченный, убираем его
-          answeredIncorrectly.delete(originalIndex);
+        // Находим индекс текущего вопроса в оригинальном массиве
+        const originalIndex = originalQuestions.findIndex(q => q.question === currentQuestion.question);
+
+        if (correct) {
+          score++;
+          totalScore++;
+          // Отмечаем вопрос как правильно отвеченный
+          if (originalIndex !== -1) {
+            answeredCorrectly.add(originalIndex);
+            // Если этот вопрос был отмечен как неправильно отвеченный, убираем его
+            answeredIncorrectly.delete(originalIndex);
+          }
+        } else {
+          // Отмечаем вопрос как неправильно отвеченный
+          if (originalIndex !== -1) {
+            answeredIncorrectly.add(originalIndex);
+          }
         }
+
+        // Изменяем текст кнопки на "Далее"
+        nextBtn.textContent = "Далее";
+
+        // Блокируем выбор вариантов после проверки
+        document.querySelectorAll('.option').forEach(el => {
+          el.style.pointerEvents = 'none';
+        });
       } else {
-        // Отмечаем вопрос как неправильно отвеченный
-        if (originalIndex !== -1) {
-          answeredIncorrectly.add(originalIndex);
+        // Режим перехода к следующему вопросу
+        selected = null;
+        selectedElement = null;
+        currentIndex++;
+
+        // Если это была последняя попытка в текущем списке вопросов
+        if (currentIndex >= currentQuestions.length) {
+          // Проверяем, все ли вопросы отвечены правильно
+          if (answeredCorrectly.size === originalQuestions.length) {
+            // Все вопросы отвечены правильно, завершаем тест
+            showResult();
+            return;
+          }
+
+          // Обновляем текущий список вопросов, перенося неправильно отвеченные в конец
+          const remainingQuestions = originalQuestions.filter((q, index) => !answeredCorrectly.has(index) && !answeredIncorrectly.has(index));
+          const incorrectQuestions = originalQuestions.filter((q, index) => answeredIncorrectly.has(index));
+
+          // Объединяем: сначала оставшиеся (неотвеченные), затем неправильно отвеченные
+          currentQuestions = [...remainingQuestions, ...incorrectQuestions];
+          currentIndex = 0; // Начинаем с начала нового списка
+          iteration++;
         }
-      }
 
-      selected = null;
-      currentIndex++;
-
-      // Если это была последняя попытка в текущем списке вопросов
-      if (currentIndex >= currentQuestions.length) {
-        // Проверяем, все ли вопросы отвечены правильно
-        if (answeredCorrectly.size === originalQuestions.length) {
-          // Все вопросы отвечены правильно, завершаем тест
-          showResult();
-          return;
+        // Показываем следующий вопрос, если он есть
+        if (currentIndex < currentQuestions.length) {
+          showQuestion(currentIndex);
+          // Возвращаем текст кнопки на "Проверить" для нового вопроса
+          nextBtn.textContent = "Проверить";
+          // Возвращаем возможность выбора вариантов
+          document.querySelectorAll('.option').forEach(el => {
+            el.style.pointerEvents = 'auto';
+          });
         }
-
-        // Обновляем текущий список вопросов, перенося неправильно отвеченные в конец
-        const remainingQuestions = originalQuestions.filter((q, index) => !answeredCorrectly.has(index) && !answeredIncorrectly.has(index));
-        const incorrectQuestions = originalQuestions.filter((q, index) => answeredIncorrectly.has(index));
-
-        // Объединяем: сначала оставшиеся (неотвеченные), затем неправильно отвеченные
-        currentQuestions = [...remainingQuestions, ...incorrectQuestions];
-        currentIndex = 0; // Начинаем с начала нового списка
-        iteration++;
-      }
-
-      // Показываем следующий вопрос, если он есть
-      if (currentIndex < currentQuestions.length) {
-        showQuestion(currentIndex);
       }
     });
 
